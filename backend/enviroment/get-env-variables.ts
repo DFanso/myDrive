@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import path from "path";
 
 const getEnvVariables = () => {
   const configPath = path.join(__dirname, "..", "..", "backend", "config");
 
   const processType = process.env.NODE_ENV;
+
+  console.log("processType", processType);
 
   if (processType === "production" || processType === undefined) {
     require("dotenv").config({ path: configPath + "/.env.production" });
