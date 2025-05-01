@@ -84,6 +84,10 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     passwordLastModified: Number,
+    registrationIp: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
@@ -103,6 +107,7 @@ export interface UserInterface extends Document {
   emailToken?: string;
   passwordResetToken?: string;
   passwordLastModified?: number;
+  registrationIp?: string;
 
   getEncryptionKey: () => Buffer | undefined;
   generateTempAuthToken: () => Promise<any>;

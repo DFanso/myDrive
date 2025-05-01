@@ -12,9 +12,9 @@ const sleep = () => {
   });
 };
 
-const axiosRetry = axios.create({ baseURL: getBackendURL() });
-const axiosNoRetry = axios.create({ baseURL: getBackendURL() });
-const axios3 = axios.create({ baseURL: getBackendURL() });
+const axiosRetry = axios.create({ baseURL: getBackendURL(), withCredentials: true });
+const axiosNoRetry = axios.create({ baseURL: getBackendURL(), withCredentials: true });
+const axios3 = axios.create({ baseURL: getBackendURL(), withCredentials: true });
 
 axiosRetry.interceptors.request.use(
   (config) => {

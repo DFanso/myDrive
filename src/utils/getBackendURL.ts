@@ -8,9 +8,14 @@ const getBackendURL = () => {
 
   const mode = process.env.NODE_ENV;
 
+  // if (mode === "development") {
+  //   return "http://localhost:5173/api";
+  // }
+
   if (mode === "development") {
-    return "http://localhost:5173/api";
+    return "http://192.168.1.2:5173/api";
   }
+
 
   return window.location.origin;
 };
