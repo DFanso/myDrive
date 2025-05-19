@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import {
   createAccountAPI,
   getUserAPI,
   loginAPI,
   sendPasswordResetAPI,
+  resendVerifyEmailAPI,
 } from "../../api/userAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "../../reducers/user";
@@ -28,8 +29,9 @@ const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const lastSentPassowordReset = useRef(0);
+  const lastSentEmailVerification = useRef(0);
 
-  const attemptLoginWithToken = async () => {
+  const attemptLoginWithToken = useCallback(async () => {
     setAttemptingLogin(true);
 
     try {
@@ -46,7 +48,7 @@ const LoginPage = () => {
         window.localStorage.removeItem("hasPreviouslyLoggedIn");
       }
     }
-  };
+  }, [dispatch, location, navigate]);
 
   const login = async () => {
     try {
@@ -57,7 +59,34 @@ const LoginPage = () => {
       navigate("/home");
       setLoadingLogin(false);
     } catch (e) {
-      if (
+      if (e instanceof AxiosError && e.response?.status === 403 && e.response?.data?.message === "Email not verified. Please check your email for a verification link.") {
+        setError("");
+        const result = await Swal.fire({
+          title: "Email Not Verified",
+          text: "Your email address has not been verified. Please check your email for a verification link.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Resend Verification Email",
+          cancelButtonText: "OK",
+        });
+        if (result.isConfirmed) {
+          const currentDate = Date.now();
+          if (currentDate - lastSentEmailVerification.current < 1000 * 60 * 1) {
+            Swal.fire("Hold Up!", "Please wait 1 minute before resending the verification email.", "warning");
+          } else {
+            try {
+              await toast.promise(resendVerifyEmailAPI(), {
+                pending: "Resending verification email...",
+                success: "Verification email resent! Please check your inbox.",
+                error: "Error resending verification email.",
+              });
+              lastSentEmailVerification.current = Date.now();
+            } catch (resendError) {
+              console.error("Error resending email verification:", resendError);
+            }
+          }
+        }
+      } else if (
         e instanceof AxiosError &&
         [400, 401].includes(e.response?.status || 0)
       ) {
@@ -74,14 +103,20 @@ const LoginPage = () => {
     try {
       setLoadingLogin(true);
       const createAccountResponse = await createAccountAPI(email, password);
-      window.localStorage.setItem("hasPreviouslyLoggedIn", "true");
 
       if (createAccountResponse.emailSent) {
-        toast.success("Email Verification Sent");
+        await Swal.fire({
+          title: "Account Created!",
+          text: "An email verification link has been sent to your email address. Please verify your email before logging in.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        setMode("login");
+      } else {
+        dispatch(setUser(createAccountResponse.user));
+        navigate("/home");
       }
 
-      dispatch(setUser(createAccountResponse.user));
-      navigate("/home");
       setLoadingLogin(false);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status === 409) {
@@ -146,7 +181,7 @@ const LoginPage = () => {
     }
   })();
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (mode === "login") {
       login();
@@ -217,7 +252,7 @@ const LoginPage = () => {
     } else {
       setAttemptingLogin(false);
     }
-  }, []);
+  }, [attemptLoginWithToken]);
 
   if (attemptingLogin) {
     return (

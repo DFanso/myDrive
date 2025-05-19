@@ -39,6 +39,10 @@ class UserService {
 
     if (!user) throw new NotFoundError("Cannot Find User");
 
+    if (env.emailVerification === "true" && !user.emailVerified) {
+      throw new ForbiddenError("Email not verified. Please check your email for a verification link.");
+    }
+
     if (user.registrationIp && user.registrationIp !== ipAddress) {
       throw new ForbiddenError("Login attempt from an unrecognized IP address.");
     }
