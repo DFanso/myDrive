@@ -43,7 +43,12 @@ server = http.createServer(app);
 
 require("../db/connections/mongoose");
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://192.168.1.2:5173', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'uuid'],
+  credentials: true
+}));
 app.use(cookieParser(env.passwordCookie));
 app.use(helmet());
 app.use(compression());

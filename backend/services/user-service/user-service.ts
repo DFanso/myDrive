@@ -31,13 +31,21 @@ const UserStaticType = uknownUserType as {
 class UserService {
   constructor() {}
 
-  login = async (userData: UserDataType, uuid: string | undefined) => {
+  login = async (userData: UserDataType, uuid: string | undefined, ipAddress: string | undefined) => {
     const email = userData.email;
     const password = userData.password;
 
     const user = await UserStaticType.findByCreds(email, password);
 
     if (!user) throw new NotFoundError("Cannot Find User");
+
+    if (env.emailVerification === "true" && !user.emailVerified) {
+      throw new ForbiddenError("Email not verified. Please check your email for a verification link.");
+    }
+
+    if (user.registrationIp && user.registrationIp !== ipAddress) {
+      throw new ForbiddenError("Login attempt from an unrecognized IP address.");
+    }
 
     const { accessToken, refreshToken } = await user.generateAuthToken(uuid);
 
@@ -86,7 +94,7 @@ class UserService {
     await user.save();
   };
 
-  create = async (userData: any, uuid: string | undefined) => {
+  create = async (userData: any, uuid: string | undefined, ipAddress: string | undefined) => {
     if (env.createAcctBlocked) {
       throw new ForbiddenError("Account Creation Blocked");
     }
@@ -100,6 +108,7 @@ class UserService {
     const user = new User({
       email: userData.email,
       password: userData.password,
+      registrationIp: ipAddress,
     });
     await user.save();
 

@@ -51,7 +51,8 @@ class UserController {
 
       const { user, accessToken, refreshToken } = await UserProvider.login(
         body,
-        currentUUID
+        currentUUID,
+        req.ip
       );
 
       createLoginCookie(res, accessToken, refreshToken);
@@ -131,7 +132,7 @@ class UserController {
       const currentUUID = req.headers.uuid as string;
 
       const { user, accessToken, refreshToken, emailSent } =
-        await UserProvider.create(req.body, currentUUID);
+        await UserProvider.create(req.body, currentUUID, req.ip);
 
       createLoginCookie(res, accessToken, refreshToken);
 
