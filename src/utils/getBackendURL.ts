@@ -13,7 +13,7 @@ const getBackendURL = () => {
   // }
 
   if (mode === "development") {
-    return "http://192.168.1.2:5173/api";
+    return "http://localhost:5173/api";
   }
 
 
