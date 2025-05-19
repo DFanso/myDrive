@@ -1,5 +1,5 @@
 const getBackendURL = () => {
-  // @ts-ignore
+  // @ts-expect-error import.meta.env is not recognized by default in Node.js environment
   const envURL = import.meta.env.VITE_BACKEND_URL;
 
   if (envURL) {
