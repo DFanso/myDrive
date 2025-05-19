@@ -42,7 +42,7 @@ const QuickAccess = memo(() => {
         )}
       >
         {quickfilesList?.map((file) => (
-          <QuickAccessItem key={file._id} file={file} />
+          <QuickAccessItem key={file._id} file={file} /> 
         ))}
       </div>
     </div>

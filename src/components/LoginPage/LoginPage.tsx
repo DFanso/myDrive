@@ -160,7 +160,7 @@ const LoginPage = () => {
   const headerTitle = (() => {
     switch (mode) {
       case "login":
-        return "Login to your account";
+        return "Login ";
       case "create":
         return "Create an account";
       case "reset":
@@ -234,24 +234,25 @@ const LoginPage = () => {
   return (
     <div>
       <div className="bg-[#F4F4F6] w-screen dynamic-height flex justify-center items-center">
-        <div className="rounded-md shadow-lg bg-white p-10 relative w-[90%] sm:w-[500px] animate-height">
-          <div className="absolute -top-10 left-0 right-0 flex justify-center items-center">
-            <div className="flex items-center justify-center rounded-full bg-white p-3 shadow-md">
+      <div className="flex justify-center items-center">
+            <div className="flex items-center justify-center  p-3 ">
               {!loadingLogin && (
-                <img src="/images/icon.png" alt="logo" className="w-[45px]" />
+                <img src="/images/icon.png" alt="logo" className="w-[450px]" />
               )}
               {loadingLogin && <Spinner />}
             </div>
           </div>
+        <div className="rounded-md shadow-lg bg-white p-10 relative w-[90%] h-[50%] sm:w-[500px] animate-height align">
+          
           <form onSubmit={onSubmit}>
-            <p className="text-[#212B36] font-medium text-[25px] mt-0 mb-[15px] text-center">
+            <p className="text-[#212B36] font-medium text-[25px] mb-[30px] text-center mt-[20%]">
               {headerTitle}
             </p>
             {/* Email Address */}
             <input
               type="text"
               placeholder="Email address"
-              className="w-full h-[48px] pl-[12px] pr-[12px] text-black border border-[#637381] rounded-[5px] outline-none text-[15px]"
+              className="w-full h-[48px] pl-[12px] pr-[12px] text-black border border-[#18181B] rounded-[5px] outline-none text-[15px]"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
@@ -262,14 +263,14 @@ const LoginPage = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="w-full h-[48px] pl-[12px] pr-[70px] text-black border border-[#637381] rounded-[5px] outline-none text-[15px] mt-4"
+                  className="w-full h-[48px] pl-[12px] pr-[70px] text-black border border-[#18181B] rounded-[5px] outline-none text-[15px] mt-4"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />
                 {mode === "login" && (
                   <div className="absolute right-0 top-0 bottom-0 flex items-center justify-center">
                     <a
-                      className="text-[#3c85ee] text-[15px] font-medium no-underline mr-2 mt-4"
+                      className="text-[#18181B] text-[15px] font-medium no-underline mr-2 mt-4"
                       onClick={() => setMode("reset")}
                     >
                       Forgot?
@@ -284,7 +285,7 @@ const LoginPage = () => {
               <input
                 type="password"
                 placeholder="Verify Password"
-                className="w-full h-[48px] pl-[12px] pr-[12px] text-black border border-[#637381] rounded-[5px] outline-none text-[15px] mt-4"
+                className="w-full h-[48px] pl-[12px] pr-[12px] text-black border border-[#18181B] rounded-[5px] outline-none text-[15px] mt-4"
                 onChange={(e) => setVerifyPassword(e.target.value)}
                 value={verifyPassword}
               />
@@ -297,28 +298,28 @@ const LoginPage = () => {
                 disabled={
                   isSubmitDisabled || loadingLogin || validationError !== ""
                 }
-                className="bg-[#3c85ee] border border-[#3c85ee] hover:bg-[#326bcc] rounded-[5px] text-white text-[15px] font-medium cursor-pointer py-2 px-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#18181B] border border-[#18181B] hover:bg-[#404040] rounded-[5px] text-white text-[15px] font-medium cursor-pointer py-2 px-4 disabled:opacity-100 disabled:cursor-not-allowed"
               />
             </div>
 
             <div className="mt-4">
               {mode === "login" && (
-                <p className="text-center text-[#637381] text-[15px] font-normal">
-                  Don't have an account?{" "}
+                <p className="text-center text-[#000000] text-[15px] font-normal">
+                  Don't have an account? {" "}
                   <a
                     onClick={() => setMode("create")}
-                    className="text-[#3c85ee] text-[15px] font-medium no-underline"
+                    className="text-[#717070] text-[15px] font-medium no-underline"
                   >
                     Create account
                   </a>
                 </p>
               )}
               {(mode === "create" || mode === "reset") && (
-                <p className="text-center text-[#637381] text-[15px] font-normal">
+                <p className="text-center text-[#000000] text-[15px] font-normal">
                   Back to{" "}
                   <a
                     onClick={() => setMode("login")}
-                    className="text-[#3c85ee] text-[15px] font-medium no-underline"
+                    className="text-[#7a7a7a] text-[15px] font-medium no-underline"
                   >
                     Login
                   </a>
@@ -329,7 +330,7 @@ const LoginPage = () => {
               <div className="mt-4">
                 <div className="flex justify-center items-center">
                   <AlertIcon className="w-[20px] text-red-600 mr-2" />
-                  <p className="text-[#637381] text-[15px]">
+                  <p className="text-[#18181B] text-[15px]">
                     {validationError || error}
                   </p>
                 </div>

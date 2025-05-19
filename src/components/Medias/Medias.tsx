@@ -8,6 +8,10 @@ import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { setMediaFilter, setSortBy } from "../../reducers/filter";
 import Spinner from "../Spinner/Spinner";
 import { removeNavigationMap } from "../../reducers/selected";
+import { FileText } from "../../icons";
+import SvgImageCard from "../../icons/ImageCard";
+import SvgCardImageImage from "../../icons/CardImageImage";
+import SvgCardImageVideo from "../../icons/CardImageVideo";
 
 const Medias = memo(
   ({ scrollDivRef }: { scrollDivRef: React.RefObject<HTMLDivElement> }) => {
@@ -136,7 +140,7 @@ const Medias = memo(
         {!isLoadingFiles && (
           <div
             className={classNames(
-              "grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] gap-[2px] p-0 desktopMode:px-[40px]"
+              "grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-[20px] p-0 desktopMode:px-[40px]"
             )}
           >
             <div className="fixed bottom-0 flex justify-center items-center right-0 left-0 z-10">
@@ -145,7 +149,22 @@ const Medias = memo(
             {files?.pages.map((filePage, index) => (
               <React.Fragment key={index}>
                 {filePage.map((file) => (
-                  <MediaItem file={file} key={file._id} />
+                 <div className="bg-white rounded shadow-sm overflow-hidden">
+                 <div className="pt-8 px-8 bg-slate-100">
+                   <MediaItem file={file} key={file._id} />
+                 </div>
+                 <div className="flex items-center p-4 gap-2">
+                  <div className="w-20">
+                    {file.metadata.isVideo ? (
+                     <SvgCardImageImage width={"2em"} height={"2em"}/>
+                   ) : (
+                    <SvgCardImageVideo width={"2em"} height={"2em"}/>
+                   )}
+                  </div>
+                   
+                   <p className="truncate max-w-xs">{file.filename}</p>
+                 </div>
+               </div>
                 ))}
               </React.Fragment>
             ))}

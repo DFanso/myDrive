@@ -21,7 +21,7 @@ export const deleteFilePopup = async () => {
     text: "You will not be able to recover this file.",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -33,7 +33,7 @@ export const restoreItemPopup = async () => {
     title: "Restore item?",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -45,7 +45,7 @@ export const restoreItemsPopup = async () => {
     title: "Restore items?",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -58,7 +58,7 @@ export const deleteItemsPopup = async () => {
     text: "You will not be able to recover these items.",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -71,7 +71,7 @@ export const trashItemsPopup = async () => {
     text: "Items in the trash will eventually be deleted.",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -84,7 +84,7 @@ export const makePublicPopup = async () => {
     text: "Anyone with the link will be able to download the file.",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -97,7 +97,7 @@ export const makeOneTimePublicPopup = async () => {
     text: "Anyone with the link will be able to downoad the file once.",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });
@@ -110,7 +110,7 @@ export const removeLinkPopup = async () => {
     text: "This will remove public access to the file.",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#18181B",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes",
   });

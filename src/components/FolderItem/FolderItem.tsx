@@ -100,7 +100,7 @@ const FolderItem: React.FC<FolderItemProps> = memo((props) => {
   return (
     <div
       className={classNames(
-        "p-3 border border-gray-third rounded-md overflow-hidden cursor-pointer animate hover:border-primary",
+        "p-3 border border-gray-third rounded-md overflow-hidden cursor-pointer animate hover:border-primary flex justify-between",
         {
           "bg-primary": elementSelected || elementMultiSelected,
         }
@@ -123,13 +123,13 @@ const FolderItem: React.FC<FolderItemProps> = memo((props) => {
         </div>
       )}
 
-      <div>
+      <div className="mr-4">
         <svg
           className={classNames(
             "w-10 h-10",
             elementSelected || elementMultiSelected
               ? "text-white"
-              : "text-[#3c85ee]"
+              : "text-[#454546]"
           )}
           aria-hidden="true"
           focusable="false"
