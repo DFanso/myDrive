@@ -32,19 +32,20 @@ const sendVerificationEmail = async (
   emailToken: string
 ) => {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const transporter = createEmailTransporter() as any;
 
     const emailAddress = env.emailAddress!;
     const url = env.remoteURL + `/verify-email/${emailToken}`;
 
-    const textContent = `Welcome to myDrive! Please verify your email address by navigating to the following link: ${url}`;
+    const textContent = `Welcome to ContexZero! Please verify your email address by navigating to the following link: ${url}`;
     const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myDrive Email Verification</title>
+    <title>ContexZero Email Verification</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -97,21 +98,21 @@ const sendVerificationEmail = async (
 <body>
     <div class="container">
         <div class="header">
-            <h1>Welcome to myDrive!</h1>
+            <h1>Welcome to ContexZero!</h1>
         </div>
         <div class="content">
             <p>Hello ${user.email},</p>
-            <p>Thank you for registering with myDrive. Please verify your email address to complete your registration and secure your account.</p>
+            <p>Thank you for registering with ContexZero. Please verify your email address to complete your registration and secure your account.</p>
             <p>Click the button below to verify your email:</p>
             <p style="text-align: center;">
                 <a href="${url}" class="button">Verify Email Address</a>
             </p>
             <p>If the button above doesn't work, you can also copy and paste the following link into your browser's address bar:</p>
             <p><a href="${url}">${url}</a></p>
-            <p>If you did not create an account with myDrive, please ignore this email.</p>
+            <p>If you did not create an account with ContexZero, please ignore this email.</p>
         </div>
         <div class="footer">
-            <p>&copy; ${new Date().getFullYear()} myDrive. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} ContexZero. All rights reserved.</p>
         </div>
     </div>
 </body>
@@ -119,9 +120,9 @@ const sendVerificationEmail = async (
 `;
 
     const mailOptions: MailOptionsType = {
-      from: `"myDrive Support" <${emailAddress}>`,
+      from: `"ContexZero Support" <${emailAddress}>`,
       to: user.email,
-      subject: "myDrive Email Verification - Action Required",
+      subject: "ContexZero Email Verification - Action Required",
       text: textContent,
       html: htmlContent,
     };
