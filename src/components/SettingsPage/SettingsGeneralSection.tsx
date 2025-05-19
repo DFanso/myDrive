@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePreferenceSetter } from "../../hooks/preferenceSetter";
+import { ArrowUpDown, FileText, ListOrdered, MousePointerClick, Reload } from "../../icons";
 
 const SettingsPageGeneral = () => {
   const [listViewStyle, setListViewStyle] = useState("list");
@@ -97,13 +98,17 @@ const SettingsPageGeneral = () => {
   }, []);
 
   return (
-    <div>
-      <div className="bg-white-hover p-3 flex items-center w-full rounded-md">
-        <p className="text-base">General settings</p>
+    <div className="shadow-xl">
+      <div>
+      <div className="bg-white-hover p-3 flex items-center w-full rounded-md mt-20 border border-black-400/70">
+        <p className="text-base font-bold">General</p>
       </div>
       <div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">File list style</p>
+         <div className="flex items-center">
+          <FileText />
+          <p className="text-gray-primary ml-2">File list style</p>
+         </div>
           <select
             value={listViewStyle}
             onChange={fileListStyleChange}
@@ -114,7 +119,10 @@ const SettingsPageGeneral = () => {
           </select>
         </div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Sort by</p>
+        <div className="flex items-center">
+        <ArrowUpDown />
+        <p className="text-gray-primary ml-2">Sort by</p>
+        </div>
           <select
             value={sortBy}
             onChange={sortByChange}
@@ -125,7 +133,10 @@ const SettingsPageGeneral = () => {
           </select>
         </div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Order by</p>
+        <div className="flex items-center">
+        <ListOrdered />
+        <p className="text-gray-primary ml-2">Order by</p>
+        </div>
           <select
             value={orderBy}
             onChange={orderByChange}
@@ -136,7 +147,10 @@ const SettingsPageGeneral = () => {
           </select>
         </div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Single click to enter folders</p>
+        <div className="flex items-center">
+        <MousePointerClick />
+        <p className="text-gray-primary ml-2">Single click to enter folders</p>
+        </div>
           <select
             value={singleClickFolders}
             onChange={singleClickFoldersChange}
@@ -147,7 +161,10 @@ const SettingsPageGeneral = () => {
           </select>
         </div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Load thumbnails</p>
+        <div className="flex items-center">
+        <Reload />
+        <p className="text-gray-primary ml-2">Load thumbnails</p>
+        </div>
           <select
             value={loadThumbnails}
             onChange={loadThumbnailsChange}
@@ -159,6 +176,8 @@ const SettingsPageGeneral = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

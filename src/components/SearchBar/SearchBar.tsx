@@ -133,7 +133,7 @@ const SearchBar = memo(() => {
         onChange={onChangeSearch}
         value={searchText}
         placeholder={searchTextPlaceholder}
-        className="w-full h-8 border border-gray-300 pl-11 pr-4 text-base text-black rounded-md"
+        className="w-full h-12 border border-gray-300 pl-11 pr-4 text-base text-black rounded-md"
         onFocus={onFocus}
         id="search-bar"
         autoComplete="off"

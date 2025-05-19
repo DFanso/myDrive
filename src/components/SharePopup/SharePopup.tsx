@@ -218,7 +218,7 @@ const SharePopup = memo(() => {
         style={{ marginTop: !animate ? "calc(100vh + 340px" : 0 }}
       >
         <p>Share file</p>
-        <div className="bg-light-primary p-6 rounded-md mt-4 flex items-center space-x-2">
+        <div className="bg-slate-900 p-0.5 rounded-md mt-4 flex items-center space-x-2">
           <input
             className="rounded-md w-full text-xs h-10 p-2"
             value={linkPreviewText}

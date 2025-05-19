@@ -83,33 +83,36 @@ const SettingsPage = () => {
             onClick={() => navigate("/home")}
             className="text-gray-600 hover:text-primary cursor-pointer flex flex-row items-center space-x-1 pt-6"
           >
-            <ChevronOutline className="w-6 h-6 rotate-90" />
+            <ChevronOutline className="w-6 h-6 relative bottom-10 rotate-90 mt-20" />
             <p>HOME</p>
           </a>
-          <div className="mt-8 space-y-2">
+          <div className="text-center">
+            <p>Settings</p>
+          </div>
+          <div className="mt-8 space-y-2 flex flex-col items-center">
             <div
               className={classNames(
-                "pl-2 mr-5 py-2 hover:bg-white-hover rounded-md cursor-pointer animate flex flex-row items-center w-full",
+                "pl-2 mr-5 py-2 bg-slate-950 hover:bg-slate-800 rounded-full cursor-pointer animate flex flex-row items-center w-[70%] text-center mb-6",
                 tab === "account"
-                  ? "text-primary bg-white-hover"
-                  : "text-gray-primary"
+                  ? "text-white bg-slate-800"
+                  : "text-white"
               )}
               onClick={() => changeTab("account")}
             >
-              <AccountIcon className="w-6 h-6" />
-              <p className="ml-3">Account</p>
+              {/* <AccountIcon className="w-6 h-6" /> */}
+              <p className="w-full mr-3">Account</p>
             </div>
             <div
               className={classNames(
-                "pl-2 mr-5 py-2 hover:bg-white-hover rounded-md cursor-pointer animate flex flex-row items-center w-full",
+                "pl-2 mr-5 py-2 bg-slate-950  hover:bg-slate-800 rounded-full cursor-pointer animate flex flex-row items-center  w-[70%] text-center",
                 tab === "general"
-                  ? "text-primary bg-white-hover"
-                  : "text-gray-primary"
+                  ? "text-white bg-slate-800"
+                  : "text-white"
               )}
               onClick={() => changeTab("general")}
             >
-              <TuneIcon className="w-6 h-6" />
-              <p className="ml-3">General</p>
+              {/* <TuneIcon className="w-6 h-6" /> */}
+              <p className="mr-3 w-full">General</p>
             </div>
           </div>
         </div>

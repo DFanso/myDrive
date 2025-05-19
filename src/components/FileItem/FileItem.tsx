@@ -103,7 +103,7 @@ const FileItem: React.FC<FileItemProps> = memo((props) => {
           "text-[14px] font-normal border-y",
           !elementSelected && !elementMultiSelected
             ? "text-[#212b36] hover:bg-[#f6f5fd]"
-            : "bg-[#3c85ee] animate text-white"
+            : "bg-[#343434] animate text-white"
         )}
         onClick={fileClick}
         onContextMenu={onContextMenu}

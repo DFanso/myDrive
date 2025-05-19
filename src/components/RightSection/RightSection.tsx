@@ -102,9 +102,9 @@ const RightSection = memo(() => {
     if (selectedItem.file) {
       return getFileColor(selectedItem.file.filename);
     } else if (selectedItem.folder) {
-      return "#3c85ee";
+      return "#18181B";
     } else {
-      return "#3c85ee";
+      return "#18181B";
     }
   })();
 
@@ -139,10 +139,10 @@ const RightSection = memo(() => {
               <div></div>
               <div className="w-full h-16 flex items-center relative">
                 <div
-                  className="opacity-40 w-full h-full absolute"
+                  className="opacity-100 w-full h-full absolute"
                   style={{ background: bannerBackgroundColor }}
                 ></div>
-                <p className="text-sm ml-6 z-10">{bannerText}</p>
+                <p className="text-sm ml-6 z-10 text-white">{bannerText}</p>
               </div>
               <CloseIcon
                 className="w-5 h-5 p-1 cursor-pointer absolute right-3 top-5 bg-white rounded-full shadow-lg z-10"

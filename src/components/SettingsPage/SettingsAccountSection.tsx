@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import { logoutAPI, resendVerifyEmailAPI } from "../../api/userAPI";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import ChevronOutline from "../../icons/ChevronOutline";
+import { LockClosed, Logout, Person } from "../../icons";
+import LockIcon from "../../icons/LockIcon";
 
 interface SettingsPageAccountProps {
   user: {
@@ -25,12 +28,12 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
   const logoutClick = async () => {
     try {
       const result = await Swal.fire({
-        title: "Logout?",
-        icon: "info",
+        title: "Are you sure to logout?",
+        text: "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, logout",
+        cancelButtonColor: "#18181B",
+        confirmButtonText: "Continue",
       });
 
       if (!result.value) return;
@@ -52,12 +55,12 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
   const logoutAllClick = async () => {
     try {
       const result = await Swal.fire({
-        title: "Logout all?",
-        icon: "info",
+        title: "Are you sure to logout all sessions?",
+        text: "This action cannot be undone. This will permanently delete your all sessions and remove your data from our servers.",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, logout all",
+        confirmButtonText: "Continue",
       });
 
       if (!result.value) return;
@@ -110,12 +113,17 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
         />
       )}
 
-      <div className="bg-white-hover p-3 flex items-center w-full rounded-md">
-        <p className="text-base">Account</p>
+     <div className="shadow-xl">
+     <div className=" bg-white-hover p-3 flex items-center w-full rounded-md mt-20 border border-black-400/70">
+        <p className="text-base font-bold">Account</p>
       </div>
       <div>
         <div className="p-3 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Email</p>
+          <div className="flex items-center">
+            <Person />
+          <p className="text-gray-primary ml-2">Email</p>
+          </div>
+        
           <p>{user.email}</p>
         </div>
         {"emailVerified" in user && !user.emailVerified && (
@@ -132,7 +140,10 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
           </div>
         )}
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Change password</p>
+        <div className="flex items-center">
+          <LockClosed />
+          <p className="text-gray-primary ml-2">Change password</p>
+          </div>
           <button
             className="text-primary hover:text-primary-hover cursor-pointer"
             onClick={() => setShowChangePasswordPopup(true)}
@@ -141,7 +152,10 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
           </button>
         </div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Logout account</p>
+        <div className="flex items-center">
+          <Logout />
+          <p className="text-gray-primary ml-2">Logout account</p>
+          </div>
           <button
             className="text-primary hover:text-primary-hover cursor-pointer"
             onClick={logoutClick}
@@ -150,7 +164,10 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
           </button>
         </div>
         <div className="px-3 py-4 flex flex-row justify-between items-center border-b border-gray-secondary">
-          <p className="text-gray-primary">Logout all sessions</p>
+        <div className="flex items-center">
+        <Logout />
+          <p className="text-gray-primary ml-2">Logout all sessions</p>
+          </div>
           <button
             className="text-primary hover:text-primary-hover cursor-pointer"
             onClick={logoutAllClick}
@@ -159,6 +176,7 @@ const SettingsPageAccount: React.FC<SettingsPageAccountProps> = ({
           </button>
         </div>
       </div>
+     </div>
     </div>
   );
 };

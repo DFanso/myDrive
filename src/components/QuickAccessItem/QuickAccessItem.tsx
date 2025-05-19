@@ -99,9 +99,9 @@ const QuickAccessItem = memo((props: QuickAccessItemProps) => {
   return (
     <div
       className={classNames(
-        "border rounded-md o transition-all duration-400 ease-in-out cursor-pointer flex items-center justify-center flex-col h-[150px] animiate hover:border-[#3c85ee] overflow-hidden bg-white",
+        "border rounded-md o transition-all duration-400 ease-in-out cursor-pointer flex items-center justify-center flex-col h-[150px] animiate hover:border-[#18181B] overflow-hidden bg-white",
         elementSelected || elementMultiSelected
-          ? "border-[#3c85ee]"
+          ? "border-[#18181B]"
           : "border-gray-third"
       )}
       onClick={quickItemClick}
@@ -175,7 +175,7 @@ const QuickAccessItem = memo((props: QuickAccessItemProps) => {
         className={classNames(
           "p-3 overflow-hidden text-ellipsis block w-full animate",
           elementSelected || elementMultiSelected
-            ? "bg-[#3c85ee] text-white"
+            ? "bg-[#18181B] text-white"
             : "bg-white text-[#637381]"
         )}
       >

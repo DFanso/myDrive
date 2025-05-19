@@ -7,9 +7,11 @@
 }
 
 .swal2-confirm {
-  background-color: #3c85ee !important;
+  background-color: rgb(30, 30, 30) !important;
 }
 
 .swal2-cancel {
-  background-color: red !important;
+  background-color: #ffffff;
+  border: 1px rgba(0, 0, 0, 0.496) solid;
+  color: black
 }

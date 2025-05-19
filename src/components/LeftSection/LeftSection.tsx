@@ -5,12 +5,18 @@ import AddNewDropdown from "../AddNewDropdown/AddNewDropdown";
 import TrashIcon from "../../icons/TrashIcon";
 import classNames from "classnames";
 import PhotoIcon from "../../icons/PhotoIcon";
+// import SettingsIcon from "../../icons/SettingsIcon";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { closeDrawer } from "../../reducers/leftSection";
 import SettingsIcon from "../../icons/SettingsIcon";
 import ChevronSolid from "../../icons/ChevronSolid";
 import HomeIconOutline from "../../icons/HomeIconOutline";
 import { addNavigationMap } from "../../reducers/selected";
+import SvgChart from "../../icons/Chart";
+import SvgLogout from "../../icons/Logout";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { logoutAPI } from "../../api/userAPI";
 
 const LeftSection = ({
   scrollDivRef,
@@ -87,6 +93,33 @@ const LeftSection = ({
     navigate("/settings");
   };
 
+  const logoutClick = async () => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure to logout?",
+        text: "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#18181B",
+        confirmButtonText: "Continue",
+      });
+
+      if (!result.value) return;
+
+      await toast.promise(logoutAPI(), {
+        pending: "Logging out...",
+        success: "Logged out",
+        error: "Error Logging Out",
+      });
+
+      window.localStorage.removeItem("hasPreviouslyLoggedIn");
+
+      navigate("/");
+    } catch (e) {
+      console.log("Error logging out", e);
+    }
+  };
+
   const closeDrawerEvent = useCallback(
     (e: MouseEvent | TouchEvent) => {
       if (!leftSectionOpen) return;
@@ -119,7 +152,7 @@ const LeftSection = ({
     >
       <div className="flex flex-col h-full select-none text-sm">
         <div>
-          <div className="relative mb-7">
+          <div className="relative mb-7 ">
             <a
               onClick={openDropdown}
               className="flex items-center justify-center bg-primary hover:bg-primary-hover no-underline rounded-md px-2 py-2.5"
@@ -181,6 +214,46 @@ const LeftSection = ({
           <TrashIcon className="w-6 h-6" />
           <p className="ml-2.5">Trash</p>
         </div>
+
+        <div
+          className={classNames(
+            "pl-2 mr-5 py-2 hover:bg-white-hover rounded-md cursor-pointer animate flex flex-row items-center w-full",
+            isSettings || isHomeFolder
+              ? "text-primary bg-white-hover"
+              : "text-gray-primary"
+          )}
+          onClick={goHome}
+        >
+          <SettingsIcon className="w-6 h-6" />
+          <p className="ml-3">Settings</p>
+        </div>
+
+        <div
+          className={classNames(
+            "pl-2 mr-5 py-2 hover:bg-white-hover rounded-md cursor-pointer animate flex flex-row items-center w-full",
+            isHome || isHomeFolder
+              ? "text-gray-primary"
+              : "text-gray-primary"
+          )}
+          onClick={goHome}
+        >
+          <SvgChart className="w-6 h-6" />
+          <p className="ml-3">Insights</p>
+        </div>
+
+        <button 
+        onClick={logoutClick}
+          className={classNames(
+            "pl-2 mr-5 py-2 hover:bg-white-hover rounded-md cursor-pointer animate flex flex-row items-center w-full",
+            isHome || isHomeFolder
+              ? "text-gray-primary"
+              : "text-gray-primary"
+          )}
+        >
+          <SvgLogout className="w-6 h-6" />
+          <p className="ml-3">Logout</p>
+        </button>
+
       </div>
     </div>
   );
